@@ -1,0 +1,81 @@
+<html> 
+<head> 
+    <title>registration</title> 
+</head> 
+  
+<body> 
+
+<script>
+function textCounter(field,field2,maxlimit)
+{
+ var countfield = document.getElementById(field2);
+ if ( field.value.length > maxlimit ) {
+  field.value = field.value.substring( 0, maxlimit );
+  return false;
+ } else {
+  countfield.value = maxlimit - field.value.length;
+ }
+}
+	
+
+	function validateEmail(email) {
+    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    return re.test(email);
+}
+
+  function isNotMax(e){
+	e = e || window.event;
+	var target = e.target || e.srcElement;
+	var code=e.keyCode?e.keyCode:(e.which?e.which:e.charCode)
+
+	switch (code){
+		case 13:
+		case 8:
+		case 9:
+		case 46:
+		case 37:
+		case 38:
+		case 39:
+		case 40:
+			return true;
+	}
+	return target.value.length <= target.getAttribute('maxlength');
+}
+    function check(){
+        var fLogin = document.getElementById('login');
+        var fPass = document.getElementById('pass');
+		
+        if (fLogin.value.length<3 ){
+            alert('Логин не может быть меньше 3-х символов!');
+            return false;
+        }
+        if (fPass.value.length<5){
+            alert('Пароль не может быть меньше 5-ти символов!');
+            return false;
+        }
+		
+        alert('Регистрация завершена!');
+        return true;
+    }
+  
+</script> 
+<form onsubmit="return check() "> 
+<br> Логин </br>
+<input type="text" id="login" name="login"/> 
+<br> Пароль:</br>
+ 
+<input type="password" id="pass" name="pass" />
+<br> О себe </br>
+<input disabled  maxlength="3" size="3" value="200" id="counter">
+<p><textarea rows="10"onkeyup="textCounter(this,'counter',200);" id="message" cols="45" name="text" maxlength="200"  onkeypress="return isNotMax(event)"></textarea></p>
+	осталось <span id="count"></span> символов 
+ <br> mail</br>
+
+<input type="email" id="email" name="email"/> 
+
+
+<input type="submit" value="регистрация" name="submit"/> 
+</form> 
+
+</body> 
+</html>
